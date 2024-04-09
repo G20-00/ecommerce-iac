@@ -40,5 +40,5 @@ jobs:
             -l $TF_VAR_state_location \
             --encryption-services blob
           az storage container create \
-            --name auto-twitter \
+            --name $TF_VAR_state_storage_container_name \
             --account-name $TF_VAR_state_storage_account_name
