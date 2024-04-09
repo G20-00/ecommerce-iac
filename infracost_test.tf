@@ -59,6 +59,6 @@ resource "azurerm_linux_function_app" "my_function" {
   site_config {}
 
   tags = {
-    Environment = "Prod"
-  }
+    Environment = "Prod"
+  }
 }
