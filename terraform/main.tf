@@ -1,30 +1,46 @@
-# We strongly recommend using the required_providers block to set the
-# Azure Provider source and version being used
-terraform {
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "=3.0.0"
-    }
-  }
+module "rg" {
+  source = "./modules/azurerm/resource_group"
 }
 
-# Configure the Microsoft Azure Provider
-provider "azurerm" {
-  skip_provider_registration = true # This is only required when the User, Service Principal, or Identity running Terraform lacks the permissions to register Azure Resource Providers.
-  features {}
+module "vnet" {
+  depends_on  = [module.rg]
+  source      = "./modules/azurerm/virtual_network"
+  rg_name     = module.rg.rg_name
+  rg_location = module.rg.rg_location
 }
 
-# Create a resource group
-resource "azurerm_resource_group" "example" {
-  name     = "example-resources"
-  location = "West Europe"
+module "snet" {
+  depends_on = [module.rg, module.vnet]
+  source     = "./modules/azurerm/subnet"
+  rg_name    = module.rg.rg_name
+  vnet_name  = module.vnet.vnet_name
 }
 
-# Create a virtual network within the resource group
-resource "azurerm_virtual_network" "example" {
-  name                = "example-network"
-  resource_group_name = azurerm_resource_group.example.name
-  location            = azurerm_resource_group.example.location
-  address_space       = ["10.0.0.0/16"]
+module "ni" {
+  depends_on  = [module.rg, module.snet]
+  source      = "./modules/azurerm/network_interface"
+  rg_name     = module.rg.rg_name
+  rg_location = module.rg.rg_location
+  sn_id       = module.snet.snet_id
+}
+
+module "nsg" {
+  depends_on  = [module.rg]
+  source      = "./modules/azurerm/network_security_group"
+  rg_name     = module.rg.rg_name
+  rg_location = module.rg.rg_location
+}
+
+module "nisga" {
+  depends_on = [module.ni, module.nsg]
+  source     = "./modules/azurerm/network_interface_security_group_association"
+  ni_id      = module.ni.ni_id
+  nsg_id     = module.nsg.nsg_id
+}
+
+module "aks" {
+  depends_on  = [module.rg]
+  source      = "./modules/azurerm/kubernetes_cluster"
+  rg_name     = module.rg.rg_name
+  rg_location = module.rg.rg_location
 }
