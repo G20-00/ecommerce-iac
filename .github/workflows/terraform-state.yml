@@ -1,0 +1,44 @@
+on:
+    workflow_dispatch:
+        
+name: Deploy Terraform state bucket
+
+jobs:
+  deploy:
+    name: "Deploy Terraform state bucket"
+    runs-on: ubuntu-latest
+    env:
+        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+        ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Azure login
+        run: |
+          az login --service-principal \
+            -u ${{ env.ARM_CLIENT_ID }} \
+            -p ${{ env.ARM_CLIENT_SECRET }} \
+            --tenant ${{ env.ARM_TENANT_ID }}
+      - name: Create azure resources
+        run: |
+          set -a 
+          source .env.backend
+          az group create \
+            -l $TF_VAR_state_location \
+            -n $TF_VAR_state_resource_group_name
+          az storage account create \
+            -n $TF_VAR_state_storage_account_name \
+            --sku Standard_LRS \
+            -g $TF_VAR_state_resource_group_name \
+            -l $TF_VAR_state_location \
+            --encryption-services blob
+          az storage container create \
+            --name auto-twitter \
+            --account-name $TF_VAR_state_storage_account_name
