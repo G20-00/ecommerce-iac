@@ -9,6 +9,8 @@ on:
         - trunk
         - main
         - master
+
+name: Infracost
   
 env:
     # If you use private modules you'll need this env variable to use
