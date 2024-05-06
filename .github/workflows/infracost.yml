@@ -73,6 +73,7 @@ jobs:
             infracost diff --path=. \
                             --format=json \
                             --compare-to=/tmp/infracost-base.json \
+                            --show-skipped \
                             --out-file=/tmp/infracost.json
   
         # Posts a comment to the PR using the 'update' behavior.
