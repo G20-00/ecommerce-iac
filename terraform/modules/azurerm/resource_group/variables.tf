@@ -12,7 +12,7 @@ variable "rg_name" {
 
 variable "rg_tags" {
   type        = map(string)
-  default     = { "Environment" : "Prod" }
+  default     = { "Environment" : "Prod", "Service" : "Auto" }
   description = "A mapping of tags which should be assigned to the Resource Group."
 
   validation {
