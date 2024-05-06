@@ -22,7 +22,7 @@ variable "vnet_address_space" {
 
 variable "vnet_tags" {
   type        = map(string)
-  default     = { "Environment" : "Production" }
+  default     = { "Environment" : "Prod" }
   description = "Virtual Network tags"
 
   validation {
