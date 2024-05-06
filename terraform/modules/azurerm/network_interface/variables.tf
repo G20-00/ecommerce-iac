@@ -33,7 +33,7 @@ variable "privip_address_allocation" {
 
 variable "ni_tags" {
   type        = map(string)
-  default     = { "Environment" : "Prod" }
+  default     = { "Environment" : "Prod", "Service" : "Auto" }
   description = "Network Interface tags"
 
   validation {

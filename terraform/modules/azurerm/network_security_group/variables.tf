@@ -16,7 +16,7 @@ variable "nsg_name" {
 
 variable "nsg_tags" {
   type        = map(string)
-  default     = { "Environment" : "Prod" }
+  default     = { "Environment" : "Prod", "Service" : "Auto" }
   description = "Network Security Group tags"
 
   validation {

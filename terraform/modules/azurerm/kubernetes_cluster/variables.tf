@@ -22,7 +22,7 @@ variable "aks_dns_prefix" {
 
 variable "aks_tags" {
   type        = map(string)
-  default     = { "Environment" : "Prod", "Service" : "Te" }
+  default     = { "Environment" : "Prod", "Service" : "Auto" }
   description = "A mapping of tags to assign to the resource."
 
   validation {
