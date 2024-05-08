@@ -20,7 +20,7 @@ variable "rc_tags" {
   description = "Redis cache tags"
 
   validation {
-    condition     = length(var.nsg_tags) > 0
+    condition     = length(var.rc_tags) > 0
     error_message = "A mapping of tags to assign to the resource."
   }
 }
