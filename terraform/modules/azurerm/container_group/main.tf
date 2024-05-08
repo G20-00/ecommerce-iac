@@ -6,6 +6,7 @@ resource "azurerm_container_group" "cg" {
   dns_name_label      = "my-sonarqube"
   os_type             = "Linux"
   restart_policy      = "OnFailure"
+  tags                = var.cg_tags
 
   exposed_port {
     port     = 9000

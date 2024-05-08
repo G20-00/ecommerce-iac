@@ -1,18 +1,14 @@
 resource "azurerm_storage_account" "sa" {
- name                     = "mysonarqubestorage"
+  name                     = "mysonarqubestorage"
   resource_group_name      = var.rg_name
   location                 = var.rg_location
   account_tier             = "Standard"
   account_replication_type = "LRS"
   account_kind             = "StorageV2"
+  tags                     = var.sa_tags
 
   blob_properties {
     last_access_time_enabled = true
-  }
-
-  tags = {
-    Service     = "StorageService"    
-    Environment = "Production"        
   }
 }
 

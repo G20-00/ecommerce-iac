@@ -28,3 +28,14 @@ variable "sa_key" {
   type        = string
   description = "The access key for the Azure Storage account specified as above."
 }
+
+variable "cg_tags" {
+  type        = map(string)
+  default     = { "Environment" : "Prod", "Service" : "Auto" }
+  description = "Container Group tags"
+
+  validation {
+    condition     = length(var.ni_tags) > 0
+    error_message = "A mapping of tags to assign to the resource."
+  }
+}
