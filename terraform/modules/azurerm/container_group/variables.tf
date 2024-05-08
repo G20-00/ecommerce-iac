@@ -35,7 +35,7 @@ variable "cg_tags" {
   description = "Container Group tags"
 
   validation {
-    condition     = length(var.ni_tags) > 0
+    condition     = length(var.cg_tags) > 0
     error_message = "A mapping of tags to assign to the resource."
   }
 }

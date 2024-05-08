@@ -14,7 +14,7 @@ variable "sa_tags" {
   description = "Storage Account tags"
 
   validation {
-    condition     = length(var.ni_tags) > 0
+    condition     = length(var.sa_tags) > 0
     error_message = "A mapping of tags to assign to the resource."
   }
 }
