@@ -75,3 +75,10 @@ module "cg" {
   sa_key      = module.sa.sa_key
 }
 
+module "rc" {
+  depends_on  = [module.rg]
+  source      = "./modules/azurerm/redis_cache"
+  rg_name     = module.rg.rg_name
+  rc_location = module.rg.rg_location
+}
+
