@@ -17,10 +17,10 @@ module "mysql_snet" {
   vnet_name  = module.vnet.vnet_name
   subnet_delegation = {
     name = "Microsoft.DBforMySQL/flexibleServers",
-    service_delegation = {
+    service_delegation = [{
       name    = "Microsoft.DBforMySQL/flexibleServers"
       actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
-    }
+    }]
   }
 }
 
