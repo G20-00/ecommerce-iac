@@ -30,7 +30,7 @@ module "mysql" {
   source      = "./modules/azurerm/mysql_flexible_server"
   rg_name     = module.rg.rg_name
   rg_location = module.rg.rg_location
-  snet_id     = module.mysql_snet.snet_id
+  snet_id     = module.mysql_snet.mysql_snet_id
 }
 
 module "ni" {
