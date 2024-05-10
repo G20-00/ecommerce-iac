@@ -9,13 +9,6 @@ module "vnet" {
   rg_location = module.rg.rg_location
 }
 
-module "snet" {
-  depends_on = [module.rg, module.vnet]
-  source     = "./modules/azurerm/subnet"
-  rg_name    = module.rg.rg_name
-  vnet_name  = module.vnet.vnet_name
-}
-
 module "mysql_snet" {
   depends_on = [module.rg, module.vnet]
   source     = "./modules/azurerm/subnet"
