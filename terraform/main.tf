@@ -11,14 +11,10 @@ module "vnet" {
 
 module "mysql_snet" {
   depends_on = [module.rg, module.vnet]
-  source     = "./modules/azurerm/subnet"
+  source     = "./modules/azurerm/mysql_subnet"
   snet_name  = "mysqlsnet-ecommerce"
   rg_name    = module.rg.rg_name
   vnet_name  = module.vnet.vnet_name
-  subnet_delegation = {
-    name = "Microsoft.DBforMySQL/flexibleServers",
-    actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
-    }
 }
 
 module "snet" {
