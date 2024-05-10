@@ -19,3 +19,15 @@ variable "snet_address_prefixes" {
   default     = "10.0.1.0/24"
   description = "The address prefixes to use for the subnet."
 }
+
+variable "subnet_delegation" {
+  type = list(object({
+    name = string
+    service_delegation = list(object({
+      name    = string
+      actions = list(string)
+    }))
+  }))
+  description = "Delegation configuration for the subnet"
+  default = []
+}

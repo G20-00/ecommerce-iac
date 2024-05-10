@@ -16,12 +16,33 @@ module "snet" {
   vnet_name  = module.vnet.vnet_name
 }
 
+module "mysql_snet" {
+  depends_on = [module.rg, module.vnet]
+  source     = "./modules/azurerm/subnet"
+  rg_name    = module.rg.rg_name
+  vnet_name  = module.vnet.vnet_name
+  subnet_delegation = {
+    name = "mysqlDelegation"
+    service_delegation = {
+      name    = "Microsoft.DBforMySQL/flexibleServers"
+      actions = ["Microsoft.Network/virtualNetworks/subnets/join/action"]
+    }
+  }
+}
+
+module "snet" {
+  depends_on = [module.rg, module.vnet]
+  source     = "./modules/azurerm/subnet"
+  rg_name    = module.rg.rg_name
+  vnet_name  = module.vnet.vnet_name
+}
+
 module "mysql" {
   depends_on  = [module.snet]
   source      = "./modules/azurerm/mysql_flexible_server"
   rg_name     = module.rg.rg_name
   rg_location = module.rg.rg_location
-  snet_id     = module.snet.snet_id
+  snet_id     = module.mysql_snet.snet_id
 }
 
 module "ni" {
