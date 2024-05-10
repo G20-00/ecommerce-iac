@@ -22,6 +22,6 @@ variable "snet_address_prefixes" {
 
 variable "subnet_delegation" {
   type        = map(any)
-  description = "The subnet delegation configuration."
   default     = {}
+  description = "The subnet delegation configuration."
 }
