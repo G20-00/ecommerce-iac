@@ -4,18 +4,11 @@ resource "azurerm_subnet" "snet" {
   resource_group_name  = var.rg_name
   address_prefixes     = [var.snet_address_prefixes]
 
-  dynamic "delegation" {
-    for_each = var.subnet_delegation
-    content {
-      name = delegation.value.name
-
-      dynamic "service_delegation" {
-        for_each = delegation.value.service_delegation
-        content {
-          name    = service_delegation.value.name
-          actions = service_delegation.value.actions
-        }
-      }
+  delegation {
+    name = "mysqlDelegation"
+    service_delegation {
+      name    = "Microsoft.DBforMySQL/flexibleServers"
+      actions = ["Microsoft.Network/virtualNetworks/subnets/join/action"]
     }
   }
 }
