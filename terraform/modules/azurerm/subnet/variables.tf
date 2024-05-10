@@ -21,13 +21,7 @@ variable "snet_address_prefixes" {
 }
 
 variable "subnet_delegation" {
-  type = list(object({
-    name = string
-    service_delegation = list(object({
-      name    = string
-      actions = list(string)
-    }))
-  }))
-  description = "Delegation configuration for the subnet"
-  default = []
+  type        = map(any)
+  description = "The subnet delegation configuration."
+  default     = {}
 }
