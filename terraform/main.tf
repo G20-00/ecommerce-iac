@@ -34,7 +34,7 @@ module "mysql_snet" {
 module "snet" {
   depends_on = [module.rg, module.vnet]
   source     = "./modules/azurerm/subnet"
-  snet_name = "snet-ecommerce"
+  snet_name  = "snet-ecommerce"
   rg_name    = module.rg.rg_name
   vnet_name  = module.vnet.vnet_name
 }
