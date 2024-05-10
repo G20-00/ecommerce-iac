@@ -6,7 +6,7 @@ resource "azurerm_mysql_flexible_server" "mysql" {
   administrator_login    = "mysqladmin"
   administrator_password = "H@Sh1CoR3!"
   tags                   = var.mysql_tags
-  sku_name               = "Standard_D4ds_v4"
+  sku_name               = "GP_Gen5_2"
 
   delegated_subnet_id = var.snet_id
 

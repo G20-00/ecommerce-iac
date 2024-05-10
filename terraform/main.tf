@@ -15,7 +15,8 @@ module "mysql_snet" {
   snet_name  = "mysqlsnet-ecommerce"
   rg_name    = module.rg.rg_name
   vnet_name  = module.vnet.vnet_name
-  subnet_delegation = { name = "Microsoft.DBforMySQL/flexibleServers"
+  subnet_delegation = {
+    name = "Microsoft.DBforMySQL/flexibleServers",
     service_delegation = {
       name    = "Microsoft.DBforMySQL/flexibleServers"
       actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
