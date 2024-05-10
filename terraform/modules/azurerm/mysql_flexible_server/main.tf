@@ -1,5 +1,5 @@
 resource "azurerm_mysql_flexible_server" "mysql" {
-  name                   = "example-mysqlserver"
+  name                   = "ecommerce-autoiac-mysqlserver"
   resource_group_name    = var.rg_name
   location               = var.rg_location
   version                = "5.7"
