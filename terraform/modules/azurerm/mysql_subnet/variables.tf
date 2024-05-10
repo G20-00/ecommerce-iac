@@ -16,6 +16,6 @@ variable "snet_name" {
 
 variable "snet_address_prefixes" {
   type        = string
-  default     = "10.0.1.0/24"
+  default     = "10.0.0.0/24"
   description = "The address prefixes to use for the subnet."
 }
