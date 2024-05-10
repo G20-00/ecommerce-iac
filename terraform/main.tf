@@ -9,9 +9,18 @@ module "vnet" {
   rg_location = module.rg.rg_location
 }
 
+module "mysql_snet" {
+  depends_on = [module.rg, module.vnet]
+  source     = "./modules/azurerm/mysql_subnet"
+  snet_name  = "mysqlsnet-ecommerce"
+  rg_name    = module.rg.rg_name
+  vnet_name  = module.vnet.vnet_name
+}
+
 module "snet" {
   depends_on = [module.rg, module.vnet]
   source     = "./modules/azurerm/subnet"
+  snet_name  = "snet-ecommerce"
   rg_name    = module.rg.rg_name
   vnet_name  = module.vnet.vnet_name
 }
@@ -21,7 +30,7 @@ module "mysql" {
   source      = "./modules/azurerm/mysql_flexible_server"
   rg_name     = module.rg.rg_name
   rg_location = module.rg.rg_location
-  snet_id     = module.snet.snet_id
+  snet_id     = module.mysql_snet.mysql_snet_id
 }
 
 module "ni" {
