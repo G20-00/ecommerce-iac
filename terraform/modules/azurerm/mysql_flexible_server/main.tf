@@ -8,8 +8,6 @@ resource "azurerm_mysql_flexible_server" "mysql" {
   tags                   = var.mysql_tags
   sku_name               = "GP_Standard_D2ds_v4"
 
-  public_network_access_enabled = true
-
   backup_retention_days        = 7
   geo_redundant_backup_enabled = false
 
