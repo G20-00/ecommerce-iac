@@ -87,5 +87,5 @@ module "mysql_firewall" {
   depends_on = [module.mysql]
   source     = "./modules/azurerm/mysql_firewall"
   rg_name    = module.rg.rg_name
-  mysql_name = module.mysql.my_name
+  mysql_name = module.mysql.mysql_name
 }
