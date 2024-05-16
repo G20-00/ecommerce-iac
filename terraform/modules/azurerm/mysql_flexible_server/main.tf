@@ -8,8 +8,6 @@ resource "azurerm_mysql_flexible_server" "mysql" {
   tags                   = var.mysql_tags
   sku_name               = "GP_Standard_D2ds_v4"
 
-  delegated_subnet_id = var.snet_id
-
   backup_retention_days        = 7
   geo_redundant_backup_enabled = false
 
