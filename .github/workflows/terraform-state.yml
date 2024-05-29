@@ -1,6 +1,6 @@
 on:
-    workflow_dispatch:
-        
+  workflow_dispatch:
+      
 name: Deploy Terraform state bucket
 
 jobs:
@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3 # Actualización a v3
 
       - name: Azure login
         run: |
@@ -26,6 +26,7 @@ jobs:
             -u ${{ env.ARM_CLIENT_ID }} \
             -p ${{ env.ARM_CLIENT_SECRET }} \
             --tenant ${{ env.ARM_TENANT_ID }}
+            
       - name: Create azure resources
         run: |
           set -a 
