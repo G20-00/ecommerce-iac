@@ -20,6 +20,9 @@ terraform {
 data "azurerm_client_config" "current" {}
 
 data "azurerm_kubernetes_cluster" "cluster" {
+  depends_on = [
+    module.aks,
+  ]
   name                = module.aks.aks_name
   resource_group_name = module.rg.rg_name
 }
