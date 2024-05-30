@@ -47,6 +47,13 @@ module "nisga" {
   nsg_id     = module.nsg.nsg_id
 }
 
+module "cr" {
+  depends_on  = [module.rg]
+  source      = "./modules/azurerm/container_registry"
+  rg_name     = module.rg.rg_name
+  rg_location = module.rg.rg_location
+}
+
 module "aks" {
   depends_on  = [module.rg]
   source      = "./modules/azurerm/kubernetes_cluster"
