@@ -14,4 +14,10 @@ resource "azurerm_mysql_flexible_server" "mysql" {
   high_availability {
     mode = "ZoneRedundant"
   }
+
+  lifecycle {
+    ignore_changes = [
+      high_availability
+    ]
+  }
 }
