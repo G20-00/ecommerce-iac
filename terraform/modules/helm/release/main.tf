@@ -1,4 +1,4 @@
-resource "helm_release" "kp" {
+resource "helm_release" "kube-prometheus" {
   name       = var.kp_name
   namespace  = var.kp_namespace
   version    = var.kp_version
