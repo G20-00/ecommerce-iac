@@ -1,11 +1,11 @@
 resource "helm_release" "kube-prometheus" {
-  name       = var.kp_name
-  namespace  = var.kp_namespace
-  version    = var.kp_version
+  name       = "kube-prometheus-stack"
+  namespace  = "kube-public"
+  version    = "36.2.0"
   repository = "https://prometheus-community.github.io/helm-charts"
   chart      = "kube-prometheus-stack"
   set {
     name  = "service.type"
-    value = var.kp_type
+    value = "LoadBalancer"
   }
 }
