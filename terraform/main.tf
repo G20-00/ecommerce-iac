@@ -97,8 +97,8 @@ module "mysql_firewall" {
   mysql_name = module.mysql.mysql_name
 }
 module "mysql_configuration" {
-  depends_on = [module.mysql]
-  source = "./modules/azurerm/mysql_configuration"
+  depends_on          = [module.mysql]
+  source              = "./modules/azurerm/mysql_configuration"
   resource_group_name = module.rg.rg_name
   server_name         = module.mysql.mysql_name
 }
