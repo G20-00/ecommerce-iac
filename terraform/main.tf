@@ -103,3 +103,7 @@ module "mysql_configuration" {
   server_name         = module.mysql.mysql_name
 }
 
+module "helm" {
+  depends_on = [module.aks]
+  source     = "./modules/helm/release"
+}
