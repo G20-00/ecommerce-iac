@@ -3,7 +3,7 @@ resource "azurerm_container_group" "cg" {
   location            = var.rg_location
   resource_group_name = var.rg_name
   ip_address_type     = "Public"
-  dns_name_label      = "my-sonarqube"
+  dns_name_label      = "auto-sonarqubeu1"
   os_type             = "Linux"
   restart_policy      = "OnFailure"
   tags                = var.cg_tags
