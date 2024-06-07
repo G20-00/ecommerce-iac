@@ -33,71 +33,6 @@ Además, el proyecto incluye los siguientes workflows en GitHub Actions para la 
 
 Cada módulo y workflow está diseñado para asegurar la eficiencia y seguridad del sistema de comercio electrónico, asegurando que los recursos sean gestionados de manera óptima.
 
-## Descripción de los Módulos
-
-### resource_group
-
-Define el grupo de recursos en Azure. Exporta el nombre del grupo de recursos y define las variables para el nombre del grupo de recursos y la ubicación.
-
-### storage_account
-
-Configura una cuenta de almacenamiento en Azure. Exporta el nombre de la cuenta de almacenamiento y define las variables para la cuenta de almacenamiento.
-
-### storage_share
-
-Configura un recurso de almacenamiento compartido. Exporta el nombre del recurso de almacenamiento compartido y define las variables para el almacenamiento compartido.
-
-### virtual_network
-
-Configura una red virtual en Azure. Exporta el nombre de la red virtual y define las variables para la red virtual.
-
-### subnet
-
-Configura una subred dentro de la red virtual. Exporta el nombre de la subred y define las variables para la subred.
-
-### network_security_group
-
-Configura un grupo de seguridad de red. Exporta el nombre del grupo de seguridad y define las variables para el grupo de seguridad.
-
-### redis_cache
-
-Configura un caché Redis en Azure. Exporta el nombre del caché Redis y define las variables para el caché Redis.
-
-### aks_ecommerce
-
-Despliega un clúster de Kubernetes gestionado a través de Azure Kubernetes Service. Exporta información relevante del clúster de Kubernetes y define las variables para el clúster de Kubernetes.
-
-### cr_ecommerce_auto
-
-Utiliza Azure Container Registry para almacenar y gestionar imágenes de contenedores Docker. Exporta información del registro de contenedores y define las variables para el registro de contenedores.
-
-### ecommerce_autoiac_mysqlserver
-
-Proporciona un servidor MySQL para almacenamiento de datos relacionales. Exporta información del servidor MySQL y define las variables para el servidor MySQL.
-
-### mysonarcube
-
-Aloja SonarQube para análisis de código y aseguramiento de calidad. Exporta información de SonarQube y define las variables para SonarQube.
-
-### mysonarqubestorage
-
-Guarda datos y archivos relacionados con operaciones de SonarQube. Exporta información del almacenamiento de SonarQube y define las variables para el almacenamiento de SonarQube.
-
-### ni_ecommerce
-
-Conecta máquinas virtuales y otros recursos, permitiendo una comunicación fluida. Exporta información de la interfaz de red y define las variables para la interfaz de red.
-
-### nsg_ecommerce
-
-Controla el tráfico hacia y desde los recursos, asegurando que solo el tráfico autorizado tenga acceso. Exporta información del grupo de seguridad y define las variables para el grupo de seguridad.
-
-### password_redis_auto
-
-Gestiona contraseñas y claves utilizando Azure Key Vault. Exporta información del almacén de claves y define las variables para el almacén de claves.
-
-### redis_auto
-
-Proporciona almacenamiento en caché en memoria para datos frecuentemente solicitados. Exporta información del caché Redis y define las variables para el caché Redis.
 
 ## Estructura de Carpetas
 
@@ -105,11 +40,11 @@ Proporciona almacenamiento en caché en memoria para datos frecuentemente solici
 ecommerce-iac/
 ├── .git/
 ├── .github/
-│ ├── workflows/
-│ │ ├── infracost.yml
-│ │ ├── terraform-pr.yml
-│ │ ├── terraform-release.yml
-│ │ ├── terraform-state.yml
+│   ├── workflows/
+│   │   ├── infracost.yml
+│   │   ├── terraform-pr.yml
+│   │   ├── terraform-release.yml
+│   │   ├── terraform-state.yml
 ├── terraform/
 │   ├── modules/
 │   │   ├── azurerm/
@@ -138,6 +73,42 @@ ecommerce-iac/
 │   │   │   │   ├── outputs.tf
 │   │   │   │   ├── variables.tf
 │   │   │   ├── virtual_network/
+│   │   │   │   ├── main.tf
+│   │   │   │   ├── outputs.tf
+│   │   │   │   ├── variables.tf
+│   │   │   ├── aks_ecommerce/
+│   │   │   │   ├── main.tf
+│   │   │   │   ├── outputs.tf
+│   │   │   │   ├── variables.tf
+│   │   │   ├── cr_ecommerce_auto/
+│   │   │   │   ├── main.tf
+│   │   │   │   ├── outputs.tf
+│   │   │   │   ├── variables.tf
+│   │   │   ├── ecommerce_autoiac_mysqlserver/
+│   │   │   │   ├── main.tf
+│   │   │   │   ├── outputs.tf
+│   │   │   │   ├── variables.tf
+│   │   │   ├── mysonarcube/
+│   │   │   │   ├── main.tf
+│   │   │   │   ├── outputs.tf
+│   │   │   │   ├── variables.tf
+│   │   │   ├── mysonarqubestorage/
+│   │   │   │   ├── main.tf
+│   │   │   │   ├── outputs.tf
+│   │   │   │   ├── variables.tf
+│   │   │   ├── ni_ecommerce/
+│   │   │   │   ├── main.tf
+│   │   │   │   ├── outputs.tf
+│   │   │   │   ├── variables.tf
+│   │   │   ├── nsg_ecommerce/
+│   │   │   │   ├── main.tf
+│   │   │   │   ├── outputs.tf
+│   │   │   │   ├── variables.tf
+│   │   │   ├── password_redis_auto/
+│   │   │   │   ├── main.tf
+│   │   │   │   ├── outputs.tf
+│   │   │   │   ├── variables.tf
+│   │   │   ├── redis_auto/
 │   │   │   │   ├── main.tf
 │   │   │   │   ├── outputs.tf
 │   │   │   │   ├── variables.tf
@@ -202,9 +173,7 @@ Define las variables usadas en los módulos de Terraform. Las variables permiten
     terraform apply
     ```
 
-## Módulos
-
-Cada módulo en este proyecto tiene su propia configuración. Aquí hay una breve descripción de cada uno:
+## Descripción de los Módulos
 
 ### resource_group
 
@@ -246,6 +215,60 @@ Cada módulo en este proyecto tiene su propia configuración. Aquí hay una brev
 
 - **main.tf**: Configura un caché Redis en Azure.
 - **outputs.tf**: Exporta el nombre del caché Redis.
+- **variables.tf**: Define las variables para el caché Redis.
+
+### aks_ecommerce
+
+- **main.tf**: Despliega un clúster de Kubernetes gestionado a través de Azure Kubernetes Service.
+- **outputs.tf**: Exporta información relevante del clúster de Kubernetes.
+- **variables.tf**: Define las variables para el clúster de Kubernetes.
+
+### cr_ecommerce_auto
+
+- **main.tf**: Utiliza Azure Container Registry para almacenar y gestionar imágenes de contenedores Docker.
+- **outputs.tf**: Exporta información del registro de contenedores.
+- **variables.tf**: Define las variables para el registro de contenedores.
+
+### ecommerce_autoiac_mysqlserver
+
+- **main.tf**: Proporciona un servidor MySQL para almacenamiento de datos relacionales.
+- **outputs.tf**: Exporta información del servidor MySQL.
+- **variables.tf**: Define las variables para el servidor MySQL.
+
+### mysonarcube
+
+- **main.tf**: Aloja SonarQube para análisis de código y aseguramiento de calidad.
+- **outputs.tf**: Exporta información de SonarQube.
+- **variables.tf**: Define las variables para SonarQube.
+
+### mysonarqubestorage
+
+- **main.tf**: Guarda datos y archivos relacionados con operaciones de SonarQube.
+- **outputs.tf**: Exporta información del almacenamiento de SonarQube.
+- **variables.tf**: Define las variables para el almacenamiento de SonarQube.
+
+### ni_ecommerce
+
+- **main.tf**: Conecta máquinas virtuales y otros recursos, permitiendo una comunicación fluida.
+- **outputs.tf**: Exporta información de la interfaz de red.
+- **variables.tf**: Define las variables para la interfaz de red.
+
+### nsg_ecommerce
+
+- **main.tf**: Controla el tráfico hacia y desde los recursos, asegurando que solo el tráfico autorizado tenga acceso.
+- **outputs.tf**: Exporta información del grupo de seguridad.
+- **variables.tf**: Define las variables para el grupo de seguridad.
+
+### password_redis_auto
+
+- **main.tf**: Gestiona contraseñas y claves utilizando Azure Key Vault.
+- **outputs.tf**: Exporta información del almacén de claves.
+- **variables.tf**: Define las variables para el almacén de claves.
+
+### redis_auto
+
+- **main.tf**: Proporciona almacenamiento en caché en memoria para datos frecuentemente solicitados.
+- **outputs.tf**: Exporta información del caché Redis.
 - **variables.tf**: Define las variables para el caché Redis.
 
 ## Comandos Útiles
