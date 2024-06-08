@@ -275,31 +275,84 @@ Define las variables usadas en los módulos de Terraform. Las variables permiten
 
 ### Inicialización de Terraform
 
-```sh
-terraform init
-```
-Este comando prepara el entorno de trabajo de Terraform, descargando los proveedores necesarios y configurando el backend.
+# Comandos Útiles
 
-### Planificación de la Infraestructura
+## Inicialización de Terraform
 
-```sh
-terraform plan
-```
-Este comando crea un plan de ejecución, mostrando las acciones que Terraform realizará para alcanzar el estado deseado de la infraestructura.
+    ```sh
+    terraform init
+    ```
+    Este comando prepara el entorno de trabajo de Terraform, descargando los proveedores necesarios y configurando el backend.
 
-### Aplicación de la Infraestructura
+## Planificación de la Infraestructura
 
-```sh
-terraform apply
-```
-Este comando aplica los cambios necesarios para alcanzar el estado deseado de la infraestructura, según lo definido en los archivos de configuración de Terraform.
+    ```sh
+    terraform plan
+    ```
+    Este comando crea un plan de ejecución, mostrando las acciones que Terraform realizará para alcanzar el estado deseado de la infraestructura.
 
-### Destrucción de la Infraestructura
+## Aplicación de la Infraestructura
 
-```sh
-terraform destroy
-```
-Este comando destruye todos los recursos gestionados por Terraform en el entorno actual.
+    ```sh
+    terraform apply
+    ```
+    Este comando aplica los cambios necesarios para alcanzar el estado deseado de la infraestructura, según lo definido en los archivos de configuración de Terraform.
+
+# Comandos para Correr Grafana
+
+## Port-Forward de Grafana
+
+Para acceder a Grafana desde tu máquina local, necesitas hacer un port-forwarding desde el servicio de Grafana en tu clúster de Kubernetes.
+
+1. Identifica el servicio de Grafana:
+
+    ```sh
+    kubectl get svc -n kube-public
+    ```
+
+    Busca el nombre del servicio de Grafana, por ejemplo, `kube-prometheus-stackr-grafana`.
+
+2. Ejecuta el port-forwarding:
+
+    ```sh
+    kubectl port-forward svc/kube-prometheus-stackr-grafana 3000:80 -n kube-public
+    ```
+
+    Este comando redirige el puerto 80 del servicio de Grafana al puerto 3000 en tu máquina local.
+
+## Acceso a Grafana
+
+Después de ejecutar el port-forwarding, puedes acceder a Grafana abriendo tu navegador web y navegando a:
+
+    ```sh
+    http://localhost:3000
+    ```
+
+Esta URL te permitirá acceder a la interfaz de Grafana localmente.
+
+# Comandos Adicionales para Kubernetes y Grafana
+
+## Listar Pods
+
+    ```sh
+    kubectl get pods -n kube-public
+    ```
+    Este comando lista todos los pods en el namespace `kube-public`.
+
+## Describir un Pod
+
+    ```sh
+    kubectl describe pod <pod-name> -n kube-public
+    ```
+    Este comando proporciona información detallada sobre un pod específico.
+
+## Ver los Logs de un Pod
+
+    ```sh
+    kubectl logs <pod-name> -n kube-public
+    ```
+    Este comando muestra los logs de un pod específico, útil para depurar problemas.
+
 
 ## Contribuciones
 
